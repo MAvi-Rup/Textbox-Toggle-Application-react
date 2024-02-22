@@ -15,8 +15,7 @@ const InputForm = () => {
 
   const handleAddTextbox = () => {
     setNumTextboxes(parseInt(inputValue));
-    setInputValue(""); // Reset input field after adding textboxes
-    // Initialize checkbox state for the newly added textboxes
+    setInputValue("");
     setCheckBoxesChecked((prevState) => {
       const newCheckBoxesChecked = [...prevState];
       for (let i = newCheckBoxesChecked.length; i < numTextboxes; i++) {
@@ -29,16 +28,16 @@ const InputForm = () => {
   const handleCheckboxChange = (index, change, value) => {
     setSelectedCount(selectedCount + change);
 
-    // Update positionsSelected array based on checkbox change
     if (change === 1) {
       setPositionsSelected([...positionsSelected, index]);
-      setTotalValue(totalValue + parseInt(value)); // Add value of selected textbox to totalValue
+      setTotalValue(totalValue + parseInt(value));
     } else {
-      setPositionsSelected(positionsSelected.filter((pos) => pos !== index));
-      setTotalValue(totalValue - parseInt(value)); // Subtract value of unselected textbox from totalValue
+      setPositionsSelected(
+        positionsSelected.filter((position) => position !== index)
+      );
+      setTotalValue(totalValue - parseInt(value));
     }
 
-    // Update checkbox state
     setCheckBoxesChecked((prevState) => {
       const newState = [...prevState];
       newState[index] = !prevState[index];
@@ -58,7 +57,6 @@ const InputForm = () => {
       : [];
     setPositionsSelected(selectedIndexes);
 
-    // Toggle checkboxes and update state using handleCheckboxChange
     selectedIndexes.forEach((index) => {
       handleCheckboxChange(
         index,
